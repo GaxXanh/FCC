@@ -33,13 +33,13 @@ function largestOfFour(arr) {
 }
 
 function end(str, target) {
-    // "Never give up and good luck will find you."
-    // -- Falcor
+// "Never give up and good luck will find you."
+// -- Falcor
     return str.substr(-target.length).toLowerCase() === target.toLowerCase();
 }
 
 function repeat(str, num) {
-    // repeat after me
+// repeat after me
     var returnStr = "";
     if (num <= 0) return "";
     while (num-- > 0) {
@@ -49,7 +49,7 @@ function repeat(str, num) {
 }
 
 function truncate(str, num) {
-    // Clear out that junk in your trunk
+// Clear out that junk in your trunk
     if (num < 0) return "";
     if (num >= str.trim().length) return str;
     var myArray = "";
@@ -71,7 +71,7 @@ function truncate(str, num) {
 }
 
 function chunk(arr, size) {
-    // Break it up.
+// Break it up.
     var myArr = [];
     var childArr;
     for (var i = 0; i < arr.length; i += size) {
@@ -103,9 +103,37 @@ function bouncer(arr) {
         if (typeof value === 'string' && value !== "") return true;
         return false;
     }
+
     return arr.filter(isBigEnough);
 }
 
+function destroyer(arr) {
+    var args = Array.prototype.slice.call(arguments);
+    var destroyArray = args[0];
+    var bulletArray = args.slice(1);
+    function checkCondition(value) {
+        for (var i = 0; i < bulletArray.length; i++){
+            if (value === bulletArray[i]) return false;
+        }
+        return true;
+    }
+    return destroyArray.filter(checkCondition);
+}
+
+function where(arr, num) {
+    // Find my place in this sorted array.
+    var sortedArray = arr.sort(function sortNumberAsc(a,b){
+        return a-b;
+    });
+    for(var i = 0; sortedArray.length; i++){
+        if (sortedArray[i] === num) return i;
+        if (sortedArray[i] > num) return i;
+        if (i === sortedArray.length) return sortedArray.length;
+    }
+}
+
+document.writeln(where([2, 5, 10], 15));
+//destroyer([1, 2, 3, 1, 2, 3], 5, 3);
 //bouncer([7, "abc", 13, false, "", null, undefined, NaN, 32, 9]);
 //mutation(["hello", "hey"]);
 //slasher([1, 2, 3], 2);
